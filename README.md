@@ -6,7 +6,7 @@ Android 仿IOS Dialog UI样式 ,通过纯代码实现 ,不用导入额外的图�
 
 ## Screenshot
 
-![](https://github.com/freeler/IOSDialog/tree/master/screenshot/Screenshot_20180704.jpg)
+![](https://github.com/freeler/IOSDialog/blob/master/screenshot/Screenshot_20180704.png)
 
 
 ## 使用
@@ -23,13 +23,13 @@ compile 'com.freeler.iosdialog:IOSDialog:#lastVersion#'
 - 使用Builder方式创建
 
 ```java
-OSDialog.Builder(this)
+IOSDialog.Builder(this)
         .setTitle("我是Dialog")
         .setSubTitle("IOS")
         .setNegativeText("取消")
         .setPositiveText("确定")
-        .setOnNegativeClickListener { v, dialog -> 	dialog?.dismiss() }
-        .setOnPositiveClickListener { v, dialog -> 	dialog?.dismiss() }
+        .setOnNegativeClickListener { v, dialog -> 	dialog.dismiss() }
+        .setOnPositiveClickListener { v, dialog -> 	dialog.dismiss() }
         .setCancelable(false)
         .show()
 ```
