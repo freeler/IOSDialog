@@ -30,12 +30,4 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    userOrg = 'freeler'
-    groupId = 'com.freeler.iosdialog'
-    desc = '1.0.0Android '
-    publishVersion = '1.0.0'
-    website = 'https://gitee.com/freeler/IOSDialog'
-    dryRun = 'false'
-}
 
