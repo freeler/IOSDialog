@@ -1,6 +1,6 @@
 # IOSDialog
 [![License](https://img.shields.io/badge/license-Apache%202-green.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-[ ![Download](https://api.bintray.com/packages/freeler/maven/IOSDialog/images/download.svg) ](https://bintray.com/freeler/maven/IOSDialog/_latestVersion)
+ [ ![Download](https://api.bintray.com/packages/freeleragain/maven/IOSDialog/images/download.svg) ](https://bintray.com/freeleragain/maven/IOSDialog/_latestVersion)
 
 Android 仿IOS Dialog UI样式 ,通过纯代码实现 ,不用导入额外的图片 ,可定制化能力强
 
@@ -13,7 +13,7 @@ Android 仿IOS Dialog UI样式 ,通过纯代码实现 ,不用导入额外的图�
 - 方式 1
 
 ```java
-compile 'com.freeler.iosdialog:IOSDialog:#lastVersion#'
+compile 'com.freeler:IOSDialog:#lastVersion#'
 ```
 
 - 方式 2. 拷贝Libs工程里面的library到自己的工程里面
