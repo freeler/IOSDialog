@@ -3,9 +3,12 @@ package com.freeler.iosdialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.ColorRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,6 +21,11 @@ import android.widget.TextView;
  * @author xuzeyang
  */
 public class IOSDialog {
+
+    /**
+     * Views indexed with their IDs
+     */
+    private final SparseArray<View> views;
 
     private Context context;
 
@@ -55,6 +63,7 @@ public class IOSDialog {
     private AlertDialog dialog;
 
     private IOSDialog(Builder builder) {
+        this.views = new SparseArray<>();
         this.context = builder.context;
 
         this.strTitle = builder.strTitle;
@@ -449,6 +458,71 @@ public class IOSDialog {
         }
     }
 
+    /**
+     * 获取原始Dialog对象,可以对dialog执行更多原生方法操作
+     *
+     * @return dialog
+     */
+    public AlertDialog getAlertDialog() {
+        return dialog;
+    }
+
+    /**
+     * 设置自定义控件View的点击事件
+     *
+     * @param id       view的id
+     * @param listener 点击监听接口
+     */
+    public void setChildViewClick(@IdRes int id, View.OnClickListener listener) {
+        View view = getView(id);
+        if (view != null) {
+            if (!view.isClickable()) {
+                view.setClickable(true);
+            }
+            view.setOnClickListener(listener);
+        }
+    }
+
+    /**
+     * 设置自定义控件TextView的文字
+     *
+     * @param id       view的id
+     * @param sequence 内容字符串
+     */
+    public void setChildViewText(@IdRes int id, CharSequence sequence) {
+        TextView view = getView(id);
+        if (view != null) {
+            view.setText(sequence);
+        }
+    }
+
+    /**
+     * 设置自定义控件TextView的文字颜色
+     *
+     * @param id    view的id
+     * @param color 颜色资源id
+     */
+    public void setChildViewColor(@IdRes int id, @ColorRes int color) {
+        TextView view = getView(id);
+        if (view != null) {
+            view.setTextColor(ContextCompat.getColor(context, color));
+        }
+    }
+
+    /**
+     * 设置自定义控件TextView的文字大小
+     *
+     * @param id   view的id
+     * @param size 文字大小 单位sp
+     */
+    public void setChildViewSize(@IdRes int id, int size) {
+        TextView view = getView(id);
+        if (view != null) {
+            view.setTextSize(size);
+        }
+    }
+
+
     public boolean isShowing() {
         return dialog.isShowing();
     }
@@ -482,5 +556,18 @@ public class IOSDialog {
         void onDismiss(DialogInterface dialog);
     }
 
+    @Nullable
+    @SuppressWarnings("unchecked")
+    public <T extends View> T getView(@IdRes int viewId) {
+        View view = views.get(viewId);
+        if (view == null) {
+            Window window = dialog.getWindow();
+            if (window != null) {
+                view = window.findViewById(viewId);
+                views.put(viewId, view);
+            }
+        }
+        return (T) view;
+    }
 
 }
