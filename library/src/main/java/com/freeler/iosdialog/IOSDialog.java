@@ -12,6 +12,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -241,6 +242,7 @@ public class IOSDialog {
     private void initView() {
         dismiss();
         dialog = new AlertDialog.Builder(context).create();
+        dialog.setView(new EditText(context));
         dialog.show();
         setOnDismissListener();
         setCancelable(cancelable);
