@@ -23,7 +23,7 @@ compile 'com.freeler:IOSDialog:#lastVersion#'
 - 使用Builder方式创建
 
 ```java
-IOSDialog.Builder(this)
+IOSDialog dialog = IOSDialog.Builder(this)
         .setTitle("我是Dialog")
         .setSubTitle("IOS")
         .setNegativeText("取消")
@@ -32,6 +32,19 @@ IOSDialog.Builder(this)
         .setOnPositiveClickListener { v, dialog -> 	dialog.dismiss() }
         .setCancelable(false)
         .show()
+
+//获取对象
+AlertDialog alertDialog = dialog.getAlertDialog()
+Window window = alertDialog.getWindow()
+
+//设置自定义childView相关
+TextView titleTextView = dialog.getView(R.id.tv_title)
+dialog.setChildViewText(R.id.tv_title, "这是标题")
+dialog.setChildViewColor(R.id.tv_title, R.color.colorAccent)
+dialog.setChildViewSize(R.id.tv_title, 14)
+dialog.setChildViewClick(R.id.tv_title, {
+	Toast.makeText(this@MainActivity, "点击标题", Toast.LENGTH_SHORT).show()
+})
 ```
 
 - 属性说明
@@ -58,3 +71,13 @@ IOSDialog.Builder(this)
 | setCancelable    			 | 是否允许点击外侧关闭对话框                  | false     |
 | create    				 | 创建Dialog                                |      |
 | show    					 | 创建Dialog并显示                           |    |
+
+
+- 方法说明
+
+| Attribute                  | 方法含义                                     |
+|:---------------------------|:--------------------------------------------|
+| setChildViewText           | 设置自定义TextView文字                      |  
+| setChildViewColor          | 设置自定义TextView颜色                      |  
+| setChildViewSize           | 设置自定义TextView大小                      |  
+| setChildViewClick          | 设置自定义childView点击事件                  |  
