@@ -234,7 +234,9 @@ public class IOSDialog {
          * @return Produce
          */
         public IOSDialog show() {
-            return create();
+            IOSDialog iosDialog = create();
+            iosDialog.show();
+            return iosDialog;
         }
 
     }
@@ -244,6 +246,7 @@ public class IOSDialog {
         dialog = new AlertDialog.Builder(context).create();
         dialog.setView(new EditText(context));
         dialog.show();
+        dialog.dismiss();
         setOnDismissListener();
         setCancelable(cancelable);
         Window window = dialog.getWindow();
@@ -492,9 +495,11 @@ public class IOSDialog {
      * @param sequence 内容字符串
      */
     public void setChildViewText(@IdRes int id, CharSequence sequence) {
-        TextView view = getView(id);
+        View view = getView(id);
         if (view != null) {
-            view.setText(sequence);
+            if (view instanceof TextView) {
+                ((TextView) view).setText(sequence);
+            }
         }
     }
 
@@ -505,9 +510,11 @@ public class IOSDialog {
      * @param color 颜色资源id
      */
     public void setChildViewColor(@IdRes int id, @ColorRes int color) {
-        TextView view = getView(id);
+        View view = getView(id);
         if (view != null) {
-            view.setTextColor(ContextCompat.getColor(context, color));
+            if (view instanceof TextView) {
+                ((TextView) view).setTextColor(ContextCompat.getColor(context, color));
+            }
         }
     }
 
@@ -518,15 +525,25 @@ public class IOSDialog {
      * @param size 文字大小 单位sp
      */
     public void setChildViewSize(@IdRes int id, int size) {
-        TextView view = getView(id);
+        View view = getView(id);
         if (view != null) {
-            view.setTextSize(size);
+            if (view instanceof TextView) {
+                ((TextView) view).setTextSize(size);
+            }
         }
     }
 
-
     public boolean isShowing() {
-        return dialog.isShowing();
+        return dialog != null && dialog.isShowing();
+    }
+
+    public void show() {
+        if (dialog != null) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            dialog.show();
+        }
     }
 
     public void dismiss() {
