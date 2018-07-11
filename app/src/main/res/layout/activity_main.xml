@@ -10,12 +10,36 @@
         android:id="@+id/mBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点我试试!"
+        android:text="创建并显示Dialog"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintVertical_bias="0.034" />
+
+    <Button
+        android:id="@+id/mBtnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="创建但不显示Dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
+
+    <Button
+        android:id="@+id/mBtnShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示Dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.185" />
 
 </android.support.constraint.ConstraintLayout>

@@ -10,11 +10,15 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private var dialog: IOSDialog? = null
+    private var dialogCreate: IOSDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /**
+         * 创建并显示Dialog
+         */
         mBtn.setOnClickListener {
             dialog = IOSDialog.Builder(this)
                     .setTitle("我是Dialog")
@@ -40,5 +44,32 @@ class MainActivity : AppCompatActivity() {
             })
 
         }
+
+        /**
+         * 创建但不显示Dialog
+         */
+        mBtnCreate.setOnClickListener {
+            dialogCreate = IOSDialog.Builder(this)
+                    .setTitle("显示Dialog")
+                    .setSubTitle("IOS")
+                    .setNegativeText("取消")
+                    .setPositiveText("确定")
+                    .setOnNegativeClickListener { v, dialog -> dialog?.dismiss() }
+                    .setOnPositiveClickListener { v, dialog -> dialog?.dismiss() }
+                    .setCancelable(false)
+                    .create()
+
+            dialogCreate?.apply {
+                Toast.makeText(this@MainActivity, "Dialog创建成功", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        /**
+         * 显示Dialog
+         */
+        mBtnShow.setOnClickListener {
+            dialogCreate?.show()
+        }
+
     }
 }
