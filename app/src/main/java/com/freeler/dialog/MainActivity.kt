@@ -39,9 +39,9 @@ class MainActivity : AppCompatActivity() {
             dialog?.setChildViewText(R.id.tv_title, "这是标题")
             dialog?.setChildViewColor(R.id.tv_title, R.color.colorAccent)
             dialog?.setChildViewSize(R.id.tv_title, 14)
-            dialog?.setChildViewClick(R.id.tv_title, {
+            dialog?.setChildViewClick(R.id.tv_title) {
                 Toast.makeText(this@MainActivity, "点击标题", Toast.LENGTH_SHORT).show()
-            })
+            }
 
         }
 
