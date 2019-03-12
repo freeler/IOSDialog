@@ -71,5 +71,14 @@ class MainActivity : AppCompatActivity() {
             dialogCreate?.show()
         }
 
+        /**
+         * 销毁Dialog对象
+         */
+        mBtnDestroy.setOnClickListener {
+            dialogCreate?.dismiss()
+            dialogCreate = null
+
+        }
+
     }
 }

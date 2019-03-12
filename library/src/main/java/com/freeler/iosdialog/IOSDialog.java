@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -57,10 +58,6 @@ public class IOSDialog {
     private int layId;              //布局id
     private int width;              //dialog宽度,单位dp
 
-    private TextView tvTitle;
-    private TextView tvSubTitle;
-    private TextView tvNegative;
-    private TextView tvPositive;
     private AlertDialog dialog;
 
     private IOSDialog(Builder builder) {
@@ -230,6 +227,7 @@ public class IOSDialog {
 
         /**
          * 此处相当于Produce
+         * 和create()相比,多了显示
          *
          * @return Produce
          */
@@ -259,35 +257,35 @@ public class IOSDialog {
 
             WindowManager.LayoutParams params = window.getAttributes();
             if (width == 0) {
-                params.width = DensityUtils.dip2px(context, 250);
+                params.width = dip2px(context, 250);
             } else {
-                params.width = DensityUtils.dip2px(context, width);
+                params.width = dip2px(context, width);
             }
             window.setBackgroundDrawableResource(android.R.color.transparent);
             window.setAttributes(params);
 
-            tvTitle = window.findViewById(R.id.tv_title);
-            tvSubTitle = window.findViewById(R.id.tv_content);
-            tvNegative = window.findViewById(R.id.tv_negative);
-            tvPositive = window.findViewById(R.id.tv_positive);
+            TextView tvTitle = window.findViewById(R.id.tv_title);
+            TextView tvSubTitle = window.findViewById(R.id.tv_content);
+            TextView tvNegative = window.findViewById(R.id.tv_negative);
+            TextView tvPositive = window.findViewById(R.id.tv_positive);
 
-            setTitle(strTitle);
-            setTitleColor(colorTitle);
-            setTitleSize(sizeTitle);
+            setTitle(tvTitle, strTitle);
+            setTitleColor(tvTitle, colorTitle);
+            setTitleSize(tvTitle, sizeTitle);
 
-            setSubTitle(strSubTitle);
-            setSubTitleColor(colorSubTitle);
-            setSubTitleSize(sizeSubTitle);
+            setSubTitle(tvSubTitle, strSubTitle);
+            setSubTitleColor(tvSubTitle, colorSubTitle);
+            setSubTitleSize(tvSubTitle, sizeSubTitle);
 
-            setNegative(strNegative);
-            setNegativeColor(colorNegative);
-            setNegativeSize(sizeNegative);
-            setNegativeClick();
+            setNegative(tvNegative, strNegative);
+            setNegativeColor(tvNegative, colorNegative);
+            setNegativeSize(tvNegative, sizeNegative);
+            setNegativeClick(tvNegative);
 
-            setPositive(strPositive);
-            setPositiveColor(colorPositive);
-            setPositiveSize(sizePositive);
-            setPositiveClick();
+            setPositive(tvPositive, strPositive);
+            setPositiveColor(tvPositive, colorPositive);
+            setPositiveSize(tvPositive, sizePositive);
+            setPositiveClick(tvPositive);
         }
     }
 
@@ -305,10 +303,10 @@ public class IOSDialog {
      *
      * @param charSequence 文字内容
      */
-    private void setTitle(CharSequence charSequence) {
-        if (tvTitle != null && charSequence != null) {
-            tvTitle.setText(charSequence);
-            tvTitle.setVisibility(View.VISIBLE);
+    private void setTitle(@NonNull TextView view, CharSequence charSequence) {
+        if (charSequence != null) {
+            view.setText(charSequence);
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -317,9 +315,9 @@ public class IOSDialog {
      *
      * @param id 文字颜色
      */
-    private void setTitleColor(@ColorRes int id) {
-        if (tvTitle != null && id != 0) {
-            tvTitle.setTextColor(ContextCompat.getColor(context, id));
+    private void setTitleColor(@NonNull TextView view, @ColorRes int id) {
+        if (id != 0) {
+            view.setTextColor(ContextCompat.getColor(context, id));
         }
     }
 
@@ -328,9 +326,9 @@ public class IOSDialog {
      *
      * @param size 文字大小
      */
-    private void setTitleSize(int size) {
-        if (tvTitle != null && size != 0) {
-            tvTitle.setTextSize(size);
+    private void setTitleSize(@NonNull TextView view, int size) {
+        if (size != 0) {
+            view.setTextSize(size);
         }
     }
 
@@ -339,10 +337,10 @@ public class IOSDialog {
      *
      * @param charSequence 文字内容
      */
-    private void setSubTitle(CharSequence charSequence) {
-        if (tvSubTitle != null && charSequence != null) {
-            tvSubTitle.setText(charSequence);
-            tvSubTitle.setVisibility(View.VISIBLE);
+    private void setSubTitle(@NonNull TextView view, CharSequence charSequence) {
+        if (charSequence != null) {
+            view.setText(charSequence);
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -351,9 +349,9 @@ public class IOSDialog {
      *
      * @param id 文字颜色
      */
-    private void setSubTitleColor(@ColorRes int id) {
-        if (tvSubTitle != null && id != 0) {
-            tvSubTitle.setTextColor(ContextCompat.getColor(context, id));
+    private void setSubTitleColor(@NonNull TextView view, @ColorRes int id) {
+        if (id != 0) {
+            view.setTextColor(ContextCompat.getColor(context, id));
         }
     }
 
@@ -362,9 +360,9 @@ public class IOSDialog {
      *
      * @param size 文字大小
      */
-    private void setSubTitleSize(int size) {
-        if (tvSubTitle != null && size != 0) {
-            tvSubTitle.setTextSize(size);
+    private void setSubTitleSize(@NonNull TextView view, int size) {
+        if (size != 0) {
+            view.setTextSize(size);
         }
     }
 
@@ -373,10 +371,10 @@ public class IOSDialog {
      *
      * @param charSequence 文字内容
      */
-    private void setNegative(CharSequence charSequence) {
-        if (tvNegative != null && charSequence != null) {
-            tvNegative.setText(charSequence);
-            tvNegative.setVisibility(View.VISIBLE);
+    private void setNegative(@NonNull TextView view, CharSequence charSequence) {
+        if (charSequence != null) {
+            view.setText(charSequence);
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -385,9 +383,9 @@ public class IOSDialog {
      *
      * @param color 文字颜色
      */
-    private void setNegativeColor(@ColorRes int color) {
-        if (tvNegative != null && color != 0) {
-            tvNegative.setTextColor(ContextCompat.getColor(context, color));
+    private void setNegativeColor(@NonNull TextView view, @ColorRes int color) {
+        if (color != 0) {
+            view.setTextColor(ContextCompat.getColor(context, color));
         }
     }
 
@@ -396,9 +394,9 @@ public class IOSDialog {
      *
      * @param size 文字大小
      */
-    private void setNegativeSize(int size) {
-        if (tvNegative != null && size != 0) {
-            tvNegative.setTextSize(size);
+    private void setNegativeSize(@NonNull TextView view, int size) {
+        if (size != 0) {
+            view.setTextSize(size);
         }
     }
 
@@ -407,10 +405,10 @@ public class IOSDialog {
      *
      * @param charSequence 文字内容
      */
-    private void setPositive(CharSequence charSequence) {
-        if (tvPositive != null && charSequence != null) {
-            tvPositive.setText(charSequence);
-            tvPositive.setVisibility(View.VISIBLE);
+    private void setPositive(@NonNull TextView view, CharSequence charSequence) {
+        if (charSequence != null) {
+            view.setText(charSequence);
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -419,9 +417,9 @@ public class IOSDialog {
      *
      * @param color 文字颜色
      */
-    private void setPositiveColor(@ColorRes int color) {
-        if (tvPositive != null && color != 0) {
-            tvPositive.setTextColor(ContextCompat.getColor(context, color));
+    private void setPositiveColor(@NonNull TextView view, @ColorRes int color) {
+        if (color != 0) {
+            view.setTextColor(ContextCompat.getColor(context, color));
         }
     }
 
@@ -430,27 +428,27 @@ public class IOSDialog {
      *
      * @param size 文字大小
      */
-    private void setPositiveSize(int size) {
-        if (tvPositive != null && size != 0) {
-            tvPositive.setTextSize(size);
+    private void setPositiveSize(@NonNull TextView view, int size) {
+        if (size != 0) {
+            view.setTextSize(size);
         }
     }
 
     /**
      * 设置第一按钮点击事件
      */
-    private void setNegativeClick() {
-        if (tvNegative != null && onClickNegativeListener != null) {
-            tvNegative.setOnClickListener(v -> onClickNegativeListener.onClick(v, dialog));
+    private void setNegativeClick(@NonNull TextView view) {
+        if (onClickNegativeListener != null) {
+            view.setOnClickListener(v -> onClickNegativeListener.onClick(v, dialog));
         }
     }
 
     /**
      * 设置第二按钮点击事件
      */
-    private void setPositiveClick() {
-        if (tvPositive != null && onClickPositiveListener != null) {
-            tvPositive.setOnClickListener(v -> onClickPositiveListener.onClick(v, dialog));
+    private void setPositiveClick(@NonNull TextView view) {
+        if (onClickPositiveListener != null) {
+            view.setOnClickListener(v -> onClickPositiveListener.onClick(v, dialog));
         }
     }
 
@@ -561,17 +559,8 @@ public class IOSDialog {
         void onClick(View v, AlertDialog dialog);
     }
 
-    /**
-     * Interface used to allow the creator of a dialog to run some code when the
-     * dialog is dismissed.
-     */
+
     public interface OnDismissListener {
-        /**
-         * This method will be invoked when the dialog is dismissed.
-         *
-         * @param dialog the dialog that was dismissed will be passed into the
-         *               method
-         */
         void onDismiss(DialogInterface dialog);
     }
 
@@ -587,6 +576,14 @@ public class IOSDialog {
             }
         }
         return (T) view;
+    }
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 }
