@@ -28,20 +28,22 @@
         android:visibility="gone" />
 
     <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:layout_marginTop="5dp"
-        android:background="@color/diverColor" />
+        android:background="@color/dividerColor" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <View
+            android:id="@+id/dividerCenter"
             android:layout_width="0.1dp"
             android:layout_height="40dp"
             android:layout_centerInParent="true"
-            android:background="@color/diverColor" />
+            android:background="@color/dividerColor" />
 
         <LinearLayout
             android:id="@+id/ll_buttons"

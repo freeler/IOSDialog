@@ -35,6 +35,6 @@ dependencies {
 
     implementation project(':library')
 
-//    implementation 'com.freeler:IOSDialog:1.0.4'
+//    implementation 'com.freeler:IOSDialog:1.1.0'
 }
 

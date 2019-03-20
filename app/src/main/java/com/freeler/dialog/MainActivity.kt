@@ -25,6 +25,11 @@ class MainActivity : AppCompatActivity() {
                     .setSubTitle("IOS")
                     .setNegativeText("取消")
                     .setPositiveText("确定")
+                    .setTitleColor(R.color.colorAccent)
+                    .setSubTitleColor(R.color.colorAccent)
+                    .setPositiveColor(R.color.colorAccent)
+                    .settNegativeColor(R.color.colorAccent)
+                    .setDividerColor(R.color.colorAccent)
                     .setOnNegativeClickListener { v, dialog -> dialog?.dismiss() }
                     .setOnPositiveClickListener { v, dialog -> dialog?.dismiss() }
                     .setCancelable(false)

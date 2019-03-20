@@ -65,6 +65,7 @@ dialog.setChildViewClick(R.id.tv_title, {
 | setSubTitleColor  		 | 设置副标题的文字颜色                         | #273238      |
 | settNegativeColor   		 | 设置取消按钮的文字颜色                       | #273238     |
 | setPositiveColor 			 | 设置确定按钮的文字颜色                       | #273238     |
+| setDividerColor 			 | 设置分割线的颜色                       | #C7C7CC     |
 | setContentView             | 设置自定义布局,控件id要一致 				|    |
 | setDialogWidth  			 | 设置对话框的宽度                   		| 250dp      |
 | setOnNegativeClickListener | 取消按钮的点击事件                         | |

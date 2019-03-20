@@ -49,6 +49,8 @@ public class IOSDialog {
     private int colorNegative;          //取消按钮文字颜色
     @ColorRes
     private int colorPositive;          //确定按钮文字颜色
+    @ColorRes
+    private int colorDivider;              //分割线颜色
 
     private OnClickNegativeListener onClickNegativeListener;    //取消按钮点击监听
     private OnClickPositiveListener onClickPositiveListener;    //确定按钮点击监听
@@ -78,6 +80,7 @@ public class IOSDialog {
         this.colorSubTitle = builder.colorSubTitle;
         this.colorNegative = builder.colorNegative;
         this.colorPositive = builder.colorPositive;
+        this.colorDivider = builder.colorDivider;
 
         this.onClickNegativeListener = builder.onClickNegativeListener;
         this.onClickPositiveListener = builder.onClickPositiveListener;
@@ -108,6 +111,8 @@ public class IOSDialog {
         private int colorNegative;              //取消按钮文字颜色
         @ColorRes
         private int colorPositive;              //确定按钮文字颜色
+        @ColorRes
+        private int colorDivider;              //分割线颜色
 
         private OnClickNegativeListener onClickNegativeListener;    //取消按钮点击监听
         private OnClickPositiveListener onClickPositiveListener;    //确定按钮点击监听
@@ -178,6 +183,11 @@ public class IOSDialog {
 
         public Builder setPositiveColor(@ColorRes int color) {
             this.colorPositive = color;
+            return this;
+        }
+
+        public Builder setDividerColor(@ColorRes int color) {
+            this.colorDivider = color;
             return this;
         }
 
@@ -268,23 +278,27 @@ public class IOSDialog {
             TextView tvSubTitle = window.findViewById(R.id.tv_content);
             TextView tvNegative = window.findViewById(R.id.tv_negative);
             TextView tvPositive = window.findViewById(R.id.tv_positive);
+            View divider = window.findViewById(R.id.divider);
+            View dividerCenter = window.findViewById(R.id.dividerCenter);
 
-            setTitle(tvTitle, strTitle);
-            setTitleColor(tvTitle, colorTitle);
-            setTitleSize(tvTitle, sizeTitle);
+            DialogHelper.setText(tvTitle, strTitle);
+            DialogHelper.setText(tvSubTitle, strSubTitle);
+            DialogHelper.setText(tvNegative, strNegative);
+            DialogHelper.setText(tvPositive, strPositive);
 
-            setSubTitle(tvSubTitle, strSubTitle);
-            setSubTitleColor(tvSubTitle, colorSubTitle);
-            setSubTitleSize(tvSubTitle, sizeSubTitle);
+            DialogHelper.setTextSize(tvTitle, sizeTitle);
+            DialogHelper.setTextSize(tvSubTitle, sizeSubTitle);
+            DialogHelper.setTextSize(tvNegative, sizeNegative);
+            DialogHelper.setTextSize(tvPositive, sizePositive);
 
-            setNegative(tvNegative, strNegative);
-            setNegativeColor(tvNegative, colorNegative);
-            setNegativeSize(tvNegative, sizeNegative);
+            DialogHelper.setTextColor(context, tvTitle, colorTitle);
+            DialogHelper.setTextColor(context, tvSubTitle, colorSubTitle);
+            DialogHelper.setTextColor(context, tvNegative, colorNegative);
+            DialogHelper.setTextColor(context, tvPositive, colorPositive);
+            DialogHelper.setBackgroundColor(context, divider, colorDivider);
+            DialogHelper.setBackgroundColor(context, dividerCenter, colorDivider);
+
             setNegativeClick(tvNegative);
-
-            setPositive(tvPositive, strPositive);
-            setPositiveColor(tvPositive, colorPositive);
-            setPositiveSize(tvPositive, sizePositive);
             setPositiveClick(tvPositive);
         }
     }
@@ -296,142 +310,6 @@ public class IOSDialog {
      */
     private void setCancelable(boolean cancelable) {
         dialog.setCancelable(cancelable);
-    }
-
-    /**
-     * 设置标题文字
-     *
-     * @param charSequence 文字内容
-     */
-    private void setTitle(@NonNull TextView view, CharSequence charSequence) {
-        if (charSequence != null) {
-            view.setText(charSequence);
-            view.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 设置标题文字颜色
-     *
-     * @param id 文字颜色
-     */
-    private void setTitleColor(@NonNull TextView view, @ColorRes int id) {
-        if (id != 0) {
-            view.setTextColor(ContextCompat.getColor(context, id));
-        }
-    }
-
-    /**
-     * 设置标题文字大小
-     *
-     * @param size 文字大小
-     */
-    private void setTitleSize(@NonNull TextView view, int size) {
-        if (size != 0) {
-            view.setTextSize(size);
-        }
-    }
-
-    /**
-     * 设置副标题文字
-     *
-     * @param charSequence 文字内容
-     */
-    private void setSubTitle(@NonNull TextView view, CharSequence charSequence) {
-        if (charSequence != null) {
-            view.setText(charSequence);
-            view.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 设置副标题文字颜色
-     *
-     * @param id 文字颜色
-     */
-    private void setSubTitleColor(@NonNull TextView view, @ColorRes int id) {
-        if (id != 0) {
-            view.setTextColor(ContextCompat.getColor(context, id));
-        }
-    }
-
-    /**
-     * 设置副标题文字大小
-     *
-     * @param size 文字大小
-     */
-    private void setSubTitleSize(@NonNull TextView view, int size) {
-        if (size != 0) {
-            view.setTextSize(size);
-        }
-    }
-
-    /**
-     * 设置第一按钮文字
-     *
-     * @param charSequence 文字内容
-     */
-    private void setNegative(@NonNull TextView view, CharSequence charSequence) {
-        if (charSequence != null) {
-            view.setText(charSequence);
-            view.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 设置第一按钮文字颜色
-     *
-     * @param color 文字颜色
-     */
-    private void setNegativeColor(@NonNull TextView view, @ColorRes int color) {
-        if (color != 0) {
-            view.setTextColor(ContextCompat.getColor(context, color));
-        }
-    }
-
-    /**
-     * 设置第一按钮文字大小
-     *
-     * @param size 文字大小
-     */
-    private void setNegativeSize(@NonNull TextView view, int size) {
-        if (size != 0) {
-            view.setTextSize(size);
-        }
-    }
-
-    /**
-     * 设置第二按钮文字
-     *
-     * @param charSequence 文字内容
-     */
-    private void setPositive(@NonNull TextView view, CharSequence charSequence) {
-        if (charSequence != null) {
-            view.setText(charSequence);
-            view.setVisibility(View.VISIBLE);
-        }
-    }
-
-    /**
-     * 设置第二按钮文字颜色
-     *
-     * @param color 文字颜色
-     */
-    private void setPositiveColor(@NonNull TextView view, @ColorRes int color) {
-        if (color != 0) {
-            view.setTextColor(ContextCompat.getColor(context, color));
-        }
-    }
-
-    /**
-     * 设置第二按钮文字大小
-     *
-     * @param size 文字大小
-     */
-    private void setPositiveSize(@NonNull TextView view, int size) {
-        if (size != 0) {
-            view.setTextSize(size);
-        }
     }
 
     /**
@@ -511,7 +389,7 @@ public class IOSDialog {
         View view = getView(id);
         if (view != null) {
             if (view instanceof TextView) {
-                ((TextView) view).setTextColor(ContextCompat.getColor(context, color));
+                ((TextView) view).setTextColor(ContextCompat.getColor(context.getApplicationContext(), color));
             }
         }
     }
@@ -584,6 +462,55 @@ public class IOSDialog {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    static class DialogHelper {
+        private DialogHelper() {
+            throw new IllegalStateException("No instances!");
+        }
+
+        public static void setText(@NonNull TextView view, CharSequence charSequence) {
+            ObjectHelper.requireNonNull(view, "TextView is null");
+            if (charSequence != null) {
+                view.setText(charSequence);
+                view.setVisibility(View.VISIBLE);
+            }
+        }
+
+        public static void setTextColor(Context context, @NonNull TextView view, @ColorRes int id) {
+            ObjectHelper.requireNonNull(view, "TextView is null");
+            if (id != 0) {
+                view.setTextColor(ContextCompat.getColor(context.getApplicationContext(), id));
+            }
+        }
+
+        public static void setBackgroundColor(Context context, @NonNull View view, @ColorRes int id) {
+            ObjectHelper.requireNonNull(view, "TextView is null");
+            if (id != 0) {
+                view.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), id));
+            }
+        }
+
+        public static void setTextSize(@NonNull TextView view, int size) {
+            ObjectHelper.requireNonNull(view, "TextView is null");
+            if (size != 0) {
+                view.setTextSize(size);
+            }
+        }
+
+    }
+
+    static class ObjectHelper {
+        private ObjectHelper() {
+            throw new IllegalStateException("No instances!");
+        }
+
+        public static <T> T requireNonNull(T object, String message) {
+            if (object == null) {
+                throw new NullPointerException(message);
+            }
+            return object;
+        }
     }
 
 }
