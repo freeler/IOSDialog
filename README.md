@@ -6,7 +6,9 @@ Android 仿IOS Dialog UI样式 ,通过纯代码实现 ,不用导入额外的图�
 
 ## Screenshot
 
-![](https://github.com/freeler/IOSDialog/blob/master/screenshot/Screenshot_20180704.png)
+![](https://github.com/freeler/IOSDialog/blob/master/screenshot/Screenshot_1.png)
+![](https://github.com/freeler/IOSDialog/blob/master/screenshot/Screenshot_2.png)
+![](https://github.com/freeler/IOSDialog/blob/master/screenshot/Screenshot_3.png)
 
 
 ## 使用
