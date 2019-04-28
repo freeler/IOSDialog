@@ -315,18 +315,22 @@ public class IOSDialog {
     /**
      * 设置第一按钮点击事件
      */
-    private void setNegativeClick(@NonNull TextView view) {
-        if (onClickNegativeListener != null) {
-            view.setOnClickListener(v -> onClickNegativeListener.onClick(v, dialog));
+    private void setNegativeClick(TextView view) {
+        if (view != null) {
+            if (onClickNegativeListener != null) {
+                view.setOnClickListener(v -> onClickNegativeListener.onClick(v, dialog));
+            }
         }
     }
 
     /**
      * 设置第二按钮点击事件
      */
-    private void setPositiveClick(@NonNull TextView view) {
-        if (onClickPositiveListener != null) {
-            view.setOnClickListener(v -> onClickPositiveListener.onClick(v, dialog));
+    private void setPositiveClick(TextView view) {
+        if (view != null) {
+            if (onClickPositiveListener != null) {
+                view.setOnClickListener(v -> onClickPositiveListener.onClick(v, dialog));
+            }
         }
     }
 
@@ -469,32 +473,36 @@ public class IOSDialog {
             throw new IllegalStateException("No instances!");
         }
 
-        public static void setText(@NonNull TextView view, CharSequence charSequence) {
-            ObjectHelper.requireNonNull(view, "TextView is null");
-            if (charSequence != null) {
-                view.setText(charSequence);
-                view.setVisibility(View.VISIBLE);
+        public static void setText(TextView view, CharSequence charSequence) {
+            if (view != null) {
+                if (charSequence != null) {
+                    view.setText(charSequence);
+                    view.setVisibility(View.VISIBLE);
+                }
             }
         }
 
-        public static void setTextColor(Context context, @NonNull TextView view, @ColorRes int id) {
-            ObjectHelper.requireNonNull(view, "TextView is null");
-            if (id != 0) {
-                view.setTextColor(ContextCompat.getColor(context.getApplicationContext(), id));
+        public static void setTextColor(Context context, TextView view, @ColorRes int id) {
+            if (view != null) {
+                if (id != 0) {
+                    view.setTextColor(ContextCompat.getColor(context.getApplicationContext(), id));
+                }
             }
         }
 
-        public static void setBackgroundColor(Context context, @NonNull View view, @ColorRes int id) {
-            ObjectHelper.requireNonNull(view, "TextView is null");
-            if (id != 0) {
-                view.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), id));
+        public static void setBackgroundColor(Context context, View view, @ColorRes int id) {
+            if (view != null) {
+                if (id != 0) {
+                    view.setBackgroundColor(ContextCompat.getColor(context.getApplicationContext(), id));
+                }
             }
         }
 
-        public static void setTextSize(@NonNull TextView view, int size) {
-            ObjectHelper.requireNonNull(view, "TextView is null");
-            if (size != 0) {
-                view.setTextSize(size);
+        public static void setTextSize(TextView view, int size) {
+            if (view != null) {
+                if (size != 0) {
+                    view.setTextSize(size);
+                }
             }
         }
 
